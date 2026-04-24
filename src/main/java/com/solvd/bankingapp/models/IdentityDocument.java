@@ -1,21 +1,42 @@
 package com.solvd.bankingapp.models;
 
+import com.solvd.bankingapp.util.LocalDateAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 
+@XmlRootElement(name = "identityDocument")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class IdentityDocument {
 
-    private Long      documentId;
-    private String    documentNumber;
-    private String    issuerCountry;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "documentNumber")
+    private String documentNumber;
+
+    @XmlElement(name = "issuerCountry")
+    private String issuerCountry;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlElement(name = "expiryDate")
     private LocalDate expiryDate;
-    private String    type;
-    private Long      customerId;
+
+    @XmlElement(name = "type")
+    private String type;
+
+    @XmlElement(name = "customerId")
+    private Long customerId;
 
     public IdentityDocument() {}
 
-    public IdentityDocument(Long documentId, String documentNumber, String issuerCountry,
+    public IdentityDocument(Long id, String documentNumber, String issuerCountry,
                             LocalDate expiryDate, String type, Long customerId) {
-        this.documentId     = documentId;
+        this.id     = id;
         this.documentNumber = documentNumber;
         this.issuerCountry  = issuerCountry;
         this.expiryDate     = expiryDate;
@@ -23,8 +44,8 @@ public class IdentityDocument {
         this.customerId     = customerId;
     }
 
-    public Long      getDocumentId()                            { return documentId; }
-    public void      setDocumentId(Long documentId)               { this.documentId = documentId; }
+    public Long      getDocumentId()                            { return id; }
+    public void      setDocumentId(Long id)               { this.id = id; }
     public String    getDocumentNumber()                       { return documentNumber; }
     public void      setDocumentNumber(String documentNumber)     { this.documentNumber = documentNumber; }
     public String    getIssuerCountry()                         { return issuerCountry; }

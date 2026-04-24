@@ -1,21 +1,42 @@
 package com.solvd.bankingapp.models;
 
+import com.solvd.bankingapp.util.LocalDateTimeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@XmlRootElement(name = "transaction")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Transaction {
 
-    private Long          transactionId;
-    private Long          accountId;
-    private BigDecimal    amount;
-    private String        type;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "accountId")
+    private Long accountId;
+
+    @XmlElement(name = "amount")
+    private BigDecimal amount;
+
+    @XmlElement(name = "type")
+    private String type;
+
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @XmlElement(name = "createdAt")
     private LocalDateTime createdAt;
-    private String        status;
+
+    @XmlElement(name = "status")
+    private String status;
 
     public Transaction() {}
 
-    public Transaction(Long transactionId, Long accountId, BigDecimal amount, String type, LocalDateTime createdAt, String status) {
-        this.transactionId = transactionId;
+    public Transaction(Long id, Long accountId, BigDecimal amount, String type, LocalDateTime createdAt, String status) {
+        this.id = id;
         this.accountId     = accountId;
         this.amount        = amount;
         this.type          = type;
@@ -23,8 +44,8 @@ public class Transaction {
         this.status        = status;
     }
 
-    public Long         getTransactionId() { return transactionId; }
-    public void         setTransactionId(Long transactionId) { this.transactionId = transactionId; }
+    public Long         getTransactionId() { return id; }
+    public void         setTransactionId(Long id) { this.id = id; }
     public Long          getAccountId() { return accountId; }
     public void          setAccountId(Long accountId) { this.accountId = accountId; }
     public BigDecimal    getAmount()    { return amount; }

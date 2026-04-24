@@ -1,24 +1,47 @@
 package com.solvd.bankingapp.models;
 
+import com.solvd.bankingapp.util.LocalDateAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@XmlRootElement(name = "loan")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Loan {
 
-    private Long       loanId;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "principal")
     private BigDecimal principal;
+
+    @XmlElement(name = "interestRate")
     private BigDecimal interestRate;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlElement(name = "startDate")
     private LocalDate startDate;
-    private String     status;
-    private Long       customerId;
-    private Long       currencyId;
+
+    @XmlElement(name = "status")
+    private String status;
+
+    @XmlElement(name = "customerId")
+    private Long customerId;
+
+    @XmlElement(name = "currencyId")
+    private Long currencyId;
 
     public Loan() {}
 
-    public Loan(Long loanId, BigDecimal principal, BigDecimal interestRate,
+    public Loan(Long id, BigDecimal principal, BigDecimal interestRate,
                 LocalDate startDate, String status,
                 Long customerId, Long currencyId) {
-        this.loanId       = loanId;
+        this.id       = id;
         this.principal    = principal;
         this.interestRate = interestRate;
         this.startDate    = startDate;
@@ -27,8 +50,8 @@ public class Loan {
         this.currencyId   = currencyId;
     }
 
-    public Long       getLoanId()                         { return loanId; }
-    public void       setLoanId(Long loanId)              { this.loanId = loanId; }
+    public Long       getLoanId()                         { return id; }
+    public void       setLoanId(Long id)              { this.id = id; }
     public BigDecimal getPrincipal()                          { return principal; }
     public void       setPrincipal(BigDecimal principal)          { this.principal = principal; }
     public BigDecimal getInterestRate()                       { return interestRate; }

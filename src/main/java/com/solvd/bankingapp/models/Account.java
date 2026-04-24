@@ -1,22 +1,41 @@
 package com.solvd.bankingapp.models;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
+@XmlRootElement(name = "account")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Account{
 
-    private Long       accountId;
-    private Long       customerId;
-    private Long       currencyId;
-    private String     accountNumber;
-    private String     accountType;
+    @XmlElement(name = "accountId")
+    private Long id;
+
+    @XmlElement(name = "customerId")
+    private Long customerId;
+
+    @XmlElement(name = "currencyId")
+    private Long currencyId;
+
+    @XmlElement(name = "accountNumber")
+    private String accountNumber;
+
+    @XmlElement(name = "accountType")
+    private String accountType;
+
+    @XmlElement(name = "balance")
     private BigDecimal balance;
-    private String     status;
+
+    @XmlElement(name = "status")
+    private String status;
 
     public Account() {}
 
-    public Account(Long accountId, Long customerId, Long currencyId, String accountNumber,
+    public Account(Long id, Long customerId, Long currencyId, String accountNumber,
                    String accountType, BigDecimal balance, String status) {
-        this.accountId     = accountId;
+        this.id     = id;
         this.customerId    = customerId;
         this.currencyId    = currencyId;
         this.accountNumber = accountNumber;
@@ -25,8 +44,8 @@ public class Account{
         this.status        = status;
     }
 
-    public Long       getAccountId()                          { return accountId; }
-    public void       setAccountId(Long accountId)               { this.accountId = accountId; }
+    public Long       getAccountId()                          { return id; }
+    public void       setAccountId(Long id)               { this.id = id; }
     public Long       getCustomerId()                          { return customerId; }
     public void       setCustomerId(Long customerId)               { this.customerId = customerId; }
     public Long       getCurrencyId()                          { return currencyId; }

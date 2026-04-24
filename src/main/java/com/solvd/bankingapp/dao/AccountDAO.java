@@ -22,19 +22,17 @@ public class AccountDAO extends AbstractMySQLDAO implements IAccountDAO {
         Connection con = null;
         try {
             con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-                ps.setLong(1, account.getCustomerId());
-                ps.setLong(2, account.getCurrencyId());
-                ps.setString(3, account.getAccountNumber());
-                ps.setString(4, account.getAccountType());
-                ps.setBigDecimal(5, account.getBalance());
-                ps.setString(6, account.getStatus());
-                ps.executeUpdate();
-                try (ResultSet keys = ps.getGeneratedKeys()) {
-                    if (keys.next()) {
-                        account.setAccountId(keys.getLong(1));
-                    }
-                }
+            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, account.getCustomerId());
+            ps.setLong(2, account.getCurrencyId());
+            ps.setString(3, account.getAccountNumber());
+            ps.setString(4, account.getAccountType());
+            ps.setBigDecimal(5, account.getBalance());
+            ps.setString(6, account.getStatus());
+            ps.executeUpdate();
+            ResultSet keys = ps.getGeneratedKeys();
+            if (keys.next()) {
+                account.setAccountId(keys.getLong(1));
             }
             return account;
         } catch (SQLException e) {
@@ -51,13 +49,11 @@ public class AccountDAO extends AbstractMySQLDAO implements IAccountDAO {
         Connection con = null;
         try {
             con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setLong(1, id);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        return Optional.of(mapRow(rs));
-                    }
-                }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return Optional.of(mapRow(rs));
             }
         } catch (SQLException e) {
             LOGGER.error("Error finding account by id", e);
@@ -74,11 +70,10 @@ public class AccountDAO extends AbstractMySQLDAO implements IAccountDAO {
         List<Account> accounts = new ArrayList<>();
         try {
             con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(sql);
-                 ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    accounts.add(mapRow(rs));
-                }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                accounts.add(mapRow(rs));
             }
         } catch (SQLException e) {
             LOGGER.error("Error finding all accounts", e);
@@ -94,16 +89,15 @@ public class AccountDAO extends AbstractMySQLDAO implements IAccountDAO {
         Connection con = null;
         try {
             con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setLong(1, account.getCustomerId());
-                ps.setLong(2, account.getCurrencyId());
-                ps.setString(3, account.getAccountNumber());
-                ps.setString(4, account.getAccountType());
-                ps.setBigDecimal(5, account.getBalance());
-                ps.setString(6, account.getStatus());
-                ps.setLong(7, account.getAccountId());
-                return ps.executeUpdate() > 0;
-            }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, account.getCustomerId());
+            ps.setLong(2, account.getCurrencyId());
+            ps.setString(3, account.getAccountNumber());
+            ps.setString(4, account.getAccountType());
+            ps.setBigDecimal(5, account.getBalance());
+            ps.setString(6, account.getStatus());
+            ps.setLong(7, account.getAccountId());
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.error("Error updating account", e);
         } finally {
@@ -118,12 +112,11 @@ public class AccountDAO extends AbstractMySQLDAO implements IAccountDAO {
         Connection con = null;
         try {
             con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setLong(1, id);
-                return ps.executeUpdate() > 0;
-            }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, id);
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            LOGGER.error("Error deleting account by id", e);
+            LOGGER.error("Error deleting account", e);
         } finally {
             releaseConnection(con);
         }
@@ -136,13 +129,11 @@ public class AccountDAO extends AbstractMySQLDAO implements IAccountDAO {
         Connection con = null;
         try {
             con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setString(1, accountNumber);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        return Optional.of(mapRow(rs));
-                    }
-                }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, accountNumber);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return Optional.of(mapRow(rs));
             }
         } catch (SQLException e) {
             LOGGER.error("Error finding account by account number", e);
@@ -159,13 +150,11 @@ public class AccountDAO extends AbstractMySQLDAO implements IAccountDAO {
         List<Account> accounts = new ArrayList<>();
         try {
             con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setLong(1, customerId);
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        accounts.add(mapRow(rs));
-                    }
-                }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, customerId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                accounts.add(mapRow(rs));
             }
         } catch (SQLException e) {
             LOGGER.error("Error finding accounts by customer id", e);

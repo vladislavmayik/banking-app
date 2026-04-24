@@ -1,23 +1,44 @@
 package com.solvd.bankingapp.models;
 
+import com.solvd.bankingapp.util.LocalDateTimeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@XmlRootElement(name = "transfer")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Transfer {
 
-    private Long          transferId;
-    private BigDecimal    amount;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "amount")
+    private BigDecimal amount;
+
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @XmlElement(name = "createdAt")
     private LocalDateTime createdAt;
-    private String        status;
-    private Long          fromAccountId;
-    private Long          toAccountId;
+
+    @XmlElement(name = "status")
+    private String status;
+
+    @XmlElement(name = "fromAccountId")
+    private Long fromAccountId;
+
+    @XmlElement(name = "toAccountId")
+    private Long toAccountId;
 
 
     public Transfer() {}
 
-    public Transfer(Long transferId, BigDecimal amount, LocalDateTime createdAt, String status, Long fromAccountId,
+    public Transfer(Long id, BigDecimal amount, LocalDateTime createdAt, String status, Long fromAccountId,
                     Long toAccountId) {
-        this.transferId    = transferId;
+        this.id    = id;
         this.amount        = amount;
         this.createdAt     = createdAt;
         this.status        = status;
@@ -25,8 +46,8 @@ public class Transfer {
         this.toAccountId   = toAccountId;
     }
 
-    public Long          getTransferId()                          { return transferId; }
-    public void          setTransferId(Long transferId)                { this.transferId = transferId; }
+    public Long          getTransferId()                          { return id; }
+    public void          setTransferId(Long id)                { this.id = id; }
     public BigDecimal    getAmount()                            { return amount; }
     public void          setAmount(BigDecimal amount)               { this.amount = amount; }
     public LocalDateTime getCreatedAt()                          { return createdAt; }

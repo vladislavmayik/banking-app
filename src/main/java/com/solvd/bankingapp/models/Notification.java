@@ -1,21 +1,42 @@
 package com.solvd.bankingapp.models;
 
+import com.solvd.bankingapp.util.LocalDateTimeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
 
+@XmlRootElement(name = "notification")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Notification {
 
-    private Long          notificationId;
-    private String        type;
-    private String        message;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "type")
+    private String type;
+
+    @XmlElement(name = "message")
+    private String message;
+
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @XmlElement(name = "sentAt")
     private LocalDateTime sentAt;
-    private boolean       isRead;
-    private Long          customerId;
+
+    @XmlElement(name = "isRead")
+    private boolean isRead;
+
+    @XmlElement(name = "customerId")
+    private Long customerId;
 
     public Notification() {}
 
-    public Notification(Long notificationId, String type, String message,
+    public Notification(Long id, String type, String message,
                         LocalDateTime sentAt, Long customerId) {
-        this.notificationId = notificationId;
+        this.id = id;
         this.type           = type;
         this.message        = message;
         this.sentAt         = sentAt;
@@ -23,8 +44,8 @@ public class Notification {
         this.customerId     = customerId;
     }
 
-    public Long          getNotificationId()                     { return notificationId; }
-    public void          setNotificationId(Long notificationId)        { this.notificationId = notificationId; }
+    public Long          getNotificationId()                     { return id; }
+    public void          setNotificationId(Long id)        { this.id = id; }
     public String        getType()                           { return type; }
     public void          setType(String type)                  { this.type = type; }
     public String        getMessage()                        { return message; }

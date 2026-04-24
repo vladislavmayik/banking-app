@@ -1,21 +1,42 @@
 package com.solvd.bankingapp.models;
 
+import com.solvd.bankingapp.util.LocalDateAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 
+@XmlRootElement(name = "card")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Card {
 
-    private Long      cardId;
-    private String    cardNumber;
-    private String    cardType;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "cardNumber")
+    private String cardNumber;
+
+    @XmlElement(name = "cardType")
+    private String cardType;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlElement(name = "expiryDate")
     private LocalDate expiryDate;
-    private String    status;
-    private Long      accountId;
+
+    @XmlElement(name = "status")
+    private String status;
+
+    @XmlElement(name = "accountId")
+    private Long accountId;
 
     public Card() {}
 
-    public Card(Long cardId, String cardNumber, String cardType,
+    public Card(Long id, String cardNumber, String cardType,
                 LocalDate expiryDate, String status, Long accountId) {
-        this.cardId     = cardId;
+        this.id     = id;
         this.cardNumber = cardNumber;
         this.cardType   = cardType;
         this.expiryDate = expiryDate;
@@ -23,8 +44,8 @@ public class Card {
         this.accountId  = accountId;
     }
 
-    public Long      getCardId()                      { return cardId; }
-    public void      setCardId(Long cardId)         { this.cardId = cardId; }
+    public Long      getCardId()                      { return id; }
+    public void      setCardId(Long id)         { this.id = id; }
     public String    getCardNumber()                      { return cardNumber; }
     public void      setCardNumber(String cardNumber)         { this.cardNumber = cardNumber; }
     public String    getCardType()                        { return cardType; }

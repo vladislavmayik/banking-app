@@ -1,19 +1,37 @@
 package com.solvd.bankingapp.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "address")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Address {
 
-    private Long   addressId;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "street")
     private String street;
+
+    @XmlElement(name = "city")
     private String city;
+
+    @XmlElement(name = "country")
     private String country;
+
+    @XmlElement(name = "postalCode")
     private String postalCode;
-    private Long   customerId;
+
+    @XmlElement(name = "customerId")
+    private Long customerId;
 
     public Address() {}
 
-    public Address(Long addressId, String street, String city,
+    public Address(Long id, String street, String city,
                    String country, String postalCode, Long customerId) {
-        this.addressId  = addressId;
+        this.id  = id;
         this.street     = street;
         this.city       = city;
         this.country    = country;
@@ -21,8 +39,8 @@ public class Address {
         this.customerId = customerId;
     }
 
-    public Long   getAddressId()                  { return addressId; }
-    public void   setAddressId(Long addressId)   { this.addressId = addressId; }
+    public Long   getAddressId()                  { return id; }
+    public void   setAddressId(Long id)   { this.id = id; }
     public String getStreet()                     { return street; }
     public void   setStreet(String street)         { this.street = street; }
     public String getCity()                       { return city; }
