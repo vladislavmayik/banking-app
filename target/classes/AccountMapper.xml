@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.bankingapp.mybatis.AccountMapper">
+
+    <sql id="getAccount">
+        <![CDATA[
+            SELECT
+                A.account_id        AS ACCOUNT_ID,
+                A.customer_id       AS ACCOUNT_CUSTOMER_ID,
+                A.currency_id       AS ACCOUNT_CURRENCY_ID,
+                A.account_number    AS ACCOUNT_NUMBER,
+                A.account_type      AS ACCOUNT_TYPE,
+                A.balance           AS ACCOUNT_BALANCE,
+                A.status            AS ACCOUNT_STATUS
+            FROM accounts A
+        ]]>
+    </sql>
+
+    <select id="findById" resultMap="AccountResultMap">
+        <include refid="getAccount"/>
+        <![CDATA[
+            WHERE A.account_id = #{id}
+        ]]>
+    </select>
+
+    <select id="findAll" resultMap="AccountResultMap">
+        <include refid="getAccount"/>
+    </select>
+
+    <select id="findByAccountNumber" resultMap="AccountResultMap">
+        <include refid="getAccount"/>
+        <![CDATA[
+            WHERE A.account_number = #{accountNumber}
+        ]]>
+    </select>
+
+    <select id="findByCustomerId" resultMap="AccountResultMap">
+        <include refid="getAccount"/>
+        <![CDATA[
+            WHERE A.customer_id = #{customerId}
+        ]]>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO accounts (customer_id, currency_id, account_number, account_type, balance, status)
+            VALUES (#{customerId}, #{currencyId}, #{accountNumber}, #{accountType}, #{balance}, #{status})
+        ]]>
+    </insert>
+
+    <update id="update">
+        <![CDATA[
+            UPDATE accounts
+        ]]>
+        <set>
+            <if test="customerId != null">
+                <![CDATA[ customer_id = #{customerId}, ]]>
+            </if>
+            <if test="currencyId != null">
+                <![CDATA[ currency_id = #{currencyId}, ]]>
+            </if>
+            <if test="accountNumber != null">
+                <![CDATA[ account_number = #{accountNumber}, ]]>
+            </if>
+            <if test="accountType != null">
+                <![CDATA[ account_type = #{accountType}, ]]>
+            </if>
+            <if test="balance != null">
+                <![CDATA[ balance = #{balance}, ]]>
+            </if>
+            <if test="status != null">
+                <![CDATA[ status = #{status}, ]]>
+            </if>
+        </set>
+        <![CDATA[
+            WHERE account_id = #{id}
+        ]]>
+    </update>
+
+    <delete id="deleteById">
+        <![CDATA[
+            DELETE FROM accounts WHERE account_id = #{id}
+        ]]>
+    </delete>
+
+    <resultMap type="com.solvd.bankingapp.models.Account" id="AccountResultMap" autoMapping="false">
+        <id column="ACCOUNT_ID" property="id"/>
+        <result column="ACCOUNT_CUSTOMER_ID" property="customerId"/>
+        <result column="ACCOUNT_CURRENCY_ID" property="currencyId"/>
+        <result column="ACCOUNT_NUMBER" property="accountNumber"/>
+        <result column="ACCOUNT_TYPE" property="accountType"/>
+        <result column="ACCOUNT_BALANCE" property="balance"/>
+        <result column="ACCOUNT_STATUS" property="status"/>
+    </resultMap>
+
+</mapper>

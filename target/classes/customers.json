@@ -1,0 +1,28 @@
+{
+  "customerId": 1,
+  "fullName": "John Doe",
+  "email": "john.doe@email.com",
+  "phone": "+1234567890",
+  "nationalId": "ABC123456",
+  "dateOfBirth": "1990-05-15",
+  "accounts": [
+    {
+      "accountId": 101,
+      "customerId": 1,
+      "currencyId": 1,
+      "accountNumber": "ACC-001",
+      "accountType": "CHECKING",
+      "balance": 5000.00,
+      "status": "ACTIVE"
+    },
+    {
+      "accountId": 102,
+      "customerId": 1,
+      "currencyId": 1,
+      "accountNumber": "ACC-002",
+      "accountType": "SAVINGS",
+      "balance": 12000.00,
+      "status": "ACTIVE"
+    }
+  ]
+}

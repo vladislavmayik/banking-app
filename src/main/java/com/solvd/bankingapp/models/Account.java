@@ -1,5 +1,7 @@
 package com.solvd.bankingapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -8,27 +10,35 @@ import java.math.BigDecimal;
 
 @XmlRootElement(name = "account")
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Account{
 
     @XmlElement(name = "accountId")
+    @JsonProperty("accountId")
     private Long id;
 
     @XmlElement(name = "customerId")
+    @JsonProperty("customerId")
     private Long customerId;
 
     @XmlElement(name = "currencyId")
+    @JsonProperty("currencyId")
     private Long currencyId;
 
     @XmlElement(name = "accountNumber")
+    @JsonProperty("accountNumber")
     private String accountNumber;
 
     @XmlElement(name = "accountType")
+    @JsonProperty("accountType")
     private String accountType;
 
     @XmlElement(name = "balance")
+    @JsonProperty("balance")
     private BigDecimal balance;
 
     @XmlElement(name = "status")
+    @JsonProperty("status")
     private String status;
 
     public Account() {}

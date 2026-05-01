@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.bankingapp.mybatis.CustomerMapper">
+
+    <sql id="getCustomer">
+        <![CDATA[
+            SELECT
+                C.customer_id       AS CUSTOMER_ID,
+                C.full_name         AS CUSTOMER_FULL_NAME,
+                C.email             AS CUSTOMER_EMAIL,
+                C.phone             AS CUSTOMER_PHONE,
+                C.national_id       AS CUSTOMER_NATIONAL_ID,
+                C.date_of_birth     AS CUSTOMER_DATE_OF_BIRTH,
+                A.account_id        AS ACCOUNT_ID,
+                A.account_number    AS ACCOUNT_NUMBER,
+                A.account_type      AS ACCOUNT_TYPE,
+                A.balance           AS ACCOUNT_BALANCE,
+                A.status            AS ACCOUNT_STATUS,
+                A.currency_id       AS ACCOUNT_CURRENCY_ID
+            FROM customers C
+            LEFT JOIN accounts A ON A.customer_id = C.customer_id
+        ]]>
+    </sql>
+
+    <select id="findById" resultMap="CustomerResultMap">
+        <include refid="getCustomer"/>
+        <![CDATA[
+            WHERE C.customer_id = #{id}
+        ]]>
+    </select>
+
+    <select id="findAll" resultMap="CustomerResultMap">
+        <include refid="getCustomer"/>
+    </select>
+
+    <select id="findByEmail" resultMap="CustomerResultMap">
+        <include refid="getCustomer"/>
+        <![CDATA[
+            WHERE C.email = #{email}
+        ]]>
+    </select>
+
+    <select id="findByNationalId" resultMap="CustomerResultMap">
+        <include refid="getCustomer"/>
+        <![CDATA[
+            WHERE C.national_id = #{nationalId}
+        ]]>
+    </select>
+
+    <select id="findByPhone" resultMap="CustomerResultMap">
+        <include refid="getCustomer"/>
+        <![CDATA[
+            WHERE C.phone = #{phone}
+        ]]>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO customers (full_name, email, phone, national_id, date_of_birth)
+            VALUES (#{fullName}, #{email}, #{phone}, #{nationalId}, #{dateOfBirth})
+        ]]>
+    </insert>
+
+    <update id="update">
+        <![CDATA[
+            UPDATE customers
+        ]]>
+        <set>
+            <if test="fullName != null">
+                <![CDATA[ full_name = #{fullName}, ]]>
+            </if>
+            <if test="email != null">
+                <![CDATA[ email = #{email}, ]]>
+            </if>
+            <if test="phone != null">
+                <![CDATA[ phone = #{phone}, ]]>
+            </if>
+            <if test="nationalId != null">
+                <![CDATA[ national_id = #{nationalId}, ]]>
+            </if>
+            <if test="dateOfBirth != null">
+                <![CDATA[ date_of_birth = #{dateOfBirth}, ]]>
+            </if>
+        </set>
+        <![CDATA[
+            WHERE customer_id = #{id}
+        ]]>
+    </update>
+
+    <delete id="deleteById">
+        <![CDATA[
+            DELETE FROM customers WHERE customer_id = #{id}
+        ]]>
+    </delete>
+
+    <resultMap type="com.solvd.bankingapp.models.Customer" id="CustomerResultMap" autoMapping="false">
+        <id column="CUSTOMER_ID" property="id"/>
+        <result column="CUSTOMER_FULL_NAME" property="fullName"/>
+        <result column="CUSTOMER_EMAIL" property="email"/>
+        <result column="CUSTOMER_PHONE" property="phone"/>
+        <result column="CUSTOMER_NATIONAL_ID" property="nationalId"/>
+        <result column="CUSTOMER_DATE_OF_BIRTH" property="dateOfBirth"/>
+        <collection property="accounts"
+                    ofType="com.solvd.bankingapp.models.Account"
+                    resultMap="com.solvd.bankingapp.mybatis.AccountMapper.AccountResultMap"/>
+    </resultMap>
+
+</mapper>

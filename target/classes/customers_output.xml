@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customer>
+    <customerId>1</customerId>
+    <fullName>John Doe</fullName>
+    <email>john.doe@email.com</email>
+    <phone>+1234567890</phone>
+    <nationalId>ABC123456</nationalId>
+    <accounts>
+        <account>
+            <accountId>101</accountId>
+            <accountNumber>ACC-001</accountNumber>
+            <accountType>CHECKING</accountType>
+            <balance>5000.00</balance>
+            <status>ACTIVE</status>
+        </account>
+        <account>
+            <accountId>102</accountId>
+            <accountNumber>ACC-002</accountNumber>
+            <accountType>SAVINGS</accountType>
+            <balance>12000.00</balance>
+            <status>ACTIVE</status>
+        </account>
+    </accounts>
+    <dateOfBirth>1990-05-15</dateOfBirth>
+</customer>
