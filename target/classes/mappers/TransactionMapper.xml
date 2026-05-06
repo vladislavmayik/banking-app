@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.bankingapp.mybatis.TransactionMapper">
+
+    <sql id="getTransaction">
+        <![CDATA[
+            SELECT
+                T.transaction_id    AS TRANSACTION_ID,
+                T.account_id        AS TRANSACTION_ACCOUNT_ID,
+                T.amount            AS TRANSACTION_AMOUNT,
+                T.type              AS TRANSACTION_TYPE,
+                T.created_at        AS TRANSACTION_CREATED_AT,
+                T.status            AS TRANSACTION_STATUS
+            FROM transactions T
+        ]]>
+    </sql>
+
+    <select id="findById" resultMap="TransactionResultMap">
+        <include refid="getTransaction"/>
+        <![CDATA[
+            WHERE T.transaction_id = #{id}
+        ]]>
+    </select>
+
+    <select id="findAll" resultMap="TransactionResultMap">
+        <include refid="getTransaction"/>
+    </select>
+
+    <select id="findByAccountId" resultMap="TransactionResultMap">
+        <include refid="getTransaction"/>
+        <![CDATA[
+            WHERE T.account_id = #{accountId}
+        ]]>
+    </select>
+
+    <select id="findByStatus" resultMap="TransactionResultMap">
+        <include refid="getTransaction"/>
+        <![CDATA[
+            WHERE T.status = #{status}
+        ]]>
+    </select>
+
+    <select id="findByType" resultMap="TransactionResultMap">
+        <include refid="getTransaction"/>
+        <![CDATA[
+            WHERE T.type = #{type}
+        ]]>
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="transactionId">
+        <![CDATA[
+            INSERT INTO transactions (account_id, amount, type, created_at, status)
+            VALUES (#{accountId}, #{amount}, #{type}, #{createdAt}, #{status})
+        ]]>
+    </insert>
+
+    <update id="update">
+        <![CDATA[
+            UPDATE transactions
+        ]]>
+        <set>
+            <if test="accountId != null">
+                <![CDATA[ account_id = #{accountId}, ]]>
+            </if>
+            <if test="amount != null">
+                <![CDATA[ amount = #{amount}, ]]>
+            </if>
+            <if test="type != null">
+                <![CDATA[ type = #{type}, ]]>
+            </if>
+            <if test="createdAt != null">
+                <![CDATA[ created_at = #{createdAt}, ]]>
+            </if>
+            <if test="status != null">
+                <![CDATA[ status = #{status}, ]]>
+            </if>
+        </set>
+        <![CDATA[
+            WHERE transaction_id = #{transactionId}
+        ]]>
+    </update>
+
+    <delete id="deleteById">
+        <![CDATA[
+            DELETE FROM transactions WHERE transaction_id = #{id}
+        ]]>
+    </delete>
+
+    <resultMap type="com.solvd.bankingapp.models.Transaction" id="TransactionResultMap" autoMapping="false">
+        <id column="TRANSACTION_ID" property="transactionId"/>
+        <result column="TRANSACTION_ACCOUNT_ID" property="accountId"/>
+        <result column="TRANSACTION_AMOUNT" property="amount"/>
+        <result column="TRANSACTION_TYPE" property="type"/>
+        <result column="TRANSACTION_CREATED_AT" property="createdAt"/>
+        <result column="TRANSACTION_STATUS" property="status"/>
+    </resultMap>
+
+</mapper>

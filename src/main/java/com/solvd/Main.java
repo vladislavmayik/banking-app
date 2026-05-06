@@ -35,8 +35,8 @@ public class Main {
                 .build();
 
         Customer customer1 = JsonUtil.readFromJson("src/main/resources/customers.json");
-        LOGGER.info("Customer: {}", customer.getFullName());
-        customer.getAccounts().forEach(account ->
+        LOGGER.info("Customer: {}", customer1.getFullName());
+        customer1.getAccounts().forEach(account ->
                 LOGGER.info("Account: {} | {} | {}", account.getAccountNumber(), account.getAccountType(), account.getBalance())
         );
 
