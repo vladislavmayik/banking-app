@@ -25,14 +25,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Customer customer = new Customer.Builder()
-                .id(1L)
-                .fullName("John Doe")
-                .email("john@email.com")
-                .phone("+1234567890")
-                .nationalId("ABC123456")
-                .dateOfBirth(LocalDate.of(1990, 5, 15))
-                .build();
+//        Customer customer = new Customer.Builder()
+//                .id(1L)
+//                .fullName("John Doe")
+//                .email("john@email.com")
+//                .phone("+1234567890")
+//                .nationalId("ABC123456")
+//                .dateOfBirth(LocalDate.of(1990, 5, 15))
+//                .build();
 
         Customer customer1 = JsonUtil.readFromJson("src/main/resources/customers.json");
         LOGGER.info("Customer: {}", customer1.getFullName());
@@ -42,31 +42,31 @@ public class Main {
 
         JsonUtil.writeToJson(customer1, "src/main/resources/customers_output.json");
 
-        TransactionEventPublisher publisher = new TransactionEventPublisher();
-        publisher.addListener(new LoggingTransactionListener());
-        publisher.addListener(new NotificationTransactionListener());
-
-        Transaction transaction = new Transaction();
-        transaction.setTransactionId(1L);
-        transaction.setAmount(new BigDecimal("500.00"));
-        transaction.setType("DEPOSIT");
-        transaction.setStatus("COMPLETED");
-
-        publisher.notifyListeners(transaction);
-
-        LoanInterestCalculator calculator = new LoanInterestCalculator(new SimpleInterestStrategy());
-        BigDecimal interest = calculator.calculate(BigDecimal.valueOf(10000), 0.05, 3);
-        LOGGER.info("Simple interest: {}", interest); // 1500.00
-
-        calculator.setStrategy(new CompoundInterestStrategy());
-        interest = calculator.calculate(BigDecimal.valueOf(10000), 0.05, 3);
-        LOGGER.info("Compound interest: {}", interest); // 1576.25
-
-        IAccountDAO accountDAO = new AccountDAO();
-        AccountView view = new AccountView();
-        AccountController controller = new AccountController(accountDAO, view);
-
-        controller.getAccount(1L);
+//        TransactionEventPublisher publisher = new TransactionEventPublisher();
+//        publisher.addListener(new LoggingTransactionListener());
+//        publisher.addListener(new NotificationTransactionListener());
+//
+//        Transaction transaction = new Transaction();
+//        transaction.setTransactionId(1L);
+//        transaction.setAmount(new BigDecimal("500.00"));
+//        transaction.setType("DEPOSIT");
+//        transaction.setStatus("COMPLETED");
+//
+//        publisher.notifyListeners(transaction);
+//
+//        LoanInterestCalculator calculator = new LoanInterestCalculator(new SimpleInterestStrategy());
+//        BigDecimal interest = calculator.calculate(BigDecimal.valueOf(10000), 0.05, 3);
+//        LOGGER.info("Simple interest: {}", interest); // 1500.00
+//
+//        calculator.setStrategy(new CompoundInterestStrategy());
+//        interest = calculator.calculate(BigDecimal.valueOf(10000), 0.05, 3);
+//        LOGGER.info("Compound interest: {}", interest); // 1576.25
+//
+//        IAccountDAO accountDAO = new AccountDAO();
+//        AccountView view = new AccountView();
+//        AccountController controller = new AccountController(accountDAO, view);
+//
+//        controller.getAccount(1L);
 
 //        Customer customer = XmlUtil.parseFromXml("src/main/resources/customers.xml");
 //        LOGGER.info("Customer: {}", customer.getFullName());
