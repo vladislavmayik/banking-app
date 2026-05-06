@@ -1,4 +1,4 @@
-package com.solvd.bankingapp.listener;
+package com.solvd.bankingapp.patterns.listener;
 
 import com.solvd.bankingapp.models.Transaction;
 

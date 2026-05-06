@@ -1,4 +1,4 @@
-package com.solvd.bankingapp.strategy;
+package com.solvd.bankingapp.patterns.strategy;
 
 import java.math.BigDecimal;
 

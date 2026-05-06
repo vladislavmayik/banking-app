@@ -1,9 +1,8 @@
-package com.solvd.bankingapp.mybatis;
+package com.solvd.bankingapp.dao.impl;
 
 import com.solvd.bankingapp.dao.interfaces.ITransactionDAO;
-import com.solvd.bankingapp.mybatis.TransactionMapper;
 import com.solvd.bankingapp.models.Transaction;
-import com.solvd.bankingapp.dao.factory.ConnectionFactory;
+import com.solvd.bankingapp.util.ConnectionFactory;
 
 import java.util.List;
 import java.util.Optional;

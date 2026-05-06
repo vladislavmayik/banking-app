@@ -1,4 +1,4 @@
-package com.solvd.bankingapp.dao.factory;
+package com.solvd.bankingapp.util;
 
 import com.solvd.bankingapp.mybatis.AccountMapper;
 import com.solvd.bankingapp.mybatis.CustomerMapper;

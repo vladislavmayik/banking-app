@@ -1,4 +1,4 @@
-package com.solvd.bankingapp.decorator;
+package com.solvd.bankingapp.patterns.decorator;
 
 import com.solvd.bankingapp.dao.interfaces.IAccountDAO;
 import com.solvd.bankingapp.models.Account;

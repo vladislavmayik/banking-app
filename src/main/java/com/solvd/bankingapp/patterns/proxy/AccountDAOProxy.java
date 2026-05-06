@@ -1,4 +1,4 @@
-package com.solvd.bankingapp.proxy;
+package com.solvd.bankingapp.patterns.proxy;
 
 import com.solvd.bankingapp.dao.interfaces.IAccountDAO;
 import com.solvd.bankingapp.models.Account;

@@ -1,4 +1,4 @@
-package com.solvd.bankingapp.mvc;
+package com.solvd.bankingapp.patterns.mvc;
 
 import com.solvd.bankingapp.dao.interfaces.IAccountDAO;
 import com.solvd.bankingapp.models.Account;

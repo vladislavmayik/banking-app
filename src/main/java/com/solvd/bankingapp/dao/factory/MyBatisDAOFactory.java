@@ -3,8 +3,9 @@ package com.solvd.bankingapp.dao.factory;
 import com.solvd.bankingapp.dao.interfaces.IAccountDAO;
 import com.solvd.bankingapp.dao.interfaces.ICustomerDAO;
 import com.solvd.bankingapp.dao.interfaces.ITransactionDAO;
-import com.solvd.bankingapp.mybatis.MyBatisAccountDAO;
-import com.solvd.bankingapp.mybatis.MyBatisCustomerDAO;
+import com.solvd.bankingapp.dao.impl.MyBatisAccountDAO;
+import com.solvd.bankingapp.dao.impl.MyBatisCustomerDAO;
+import com.solvd.bankingapp.dao.impl.MyBatisTransactionDAO;
 
 public class MyBatisDAOFactory extends DAOFactory {
 

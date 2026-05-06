@@ -2,18 +2,17 @@ package com.solvd;
 
 import com.solvd.bankingapp.dao.impl.AccountDAO;
 import com.solvd.bankingapp.dao.interfaces.IAccountDAO;
-import com.solvd.bankingapp.listener.LoggingTransactionListener;
-import com.solvd.bankingapp.listener.NotificationTransactionListener;
-import com.solvd.bankingapp.listener.TransactionEventPublisher;
+import com.solvd.bankingapp.patterns.listener.LoggingTransactionListener;
+import com.solvd.bankingapp.patterns.listener.NotificationTransactionListener;
+import com.solvd.bankingapp.patterns.listener.TransactionEventPublisher;
 import com.solvd.bankingapp.models.Customer;
 import com.solvd.bankingapp.models.Transaction;
-import com.solvd.bankingapp.mvc.AccountController;
-import com.solvd.bankingapp.mvc.AccountView;
-import com.solvd.bankingapp.strategy.CompoundInterestStrategy;
-import com.solvd.bankingapp.strategy.LoanInterestCalculator;
-import com.solvd.bankingapp.strategy.SimpleInterestStrategy;
+import com.solvd.bankingapp.patterns.mvc.AccountController;
+import com.solvd.bankingapp.patterns.mvc.AccountView;
+import com.solvd.bankingapp.patterns.strategy.CompoundInterestStrategy;
+import com.solvd.bankingapp.patterns.strategy.LoanInterestCalculator;
+import com.solvd.bankingapp.patterns.strategy.SimpleInterestStrategy;
 import com.solvd.bankingapp.util.JsonUtil;
-import com.solvd.bankingapp.util.XmlUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
