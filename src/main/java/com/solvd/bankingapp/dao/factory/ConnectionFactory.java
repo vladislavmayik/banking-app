@@ -1,10 +1,6 @@
-package com.solvd.bankingapp.util;
+package com.solvd.bankingapp.dao.factory;
 
-import com.solvd.bankingapp.mybatis.AccountMapper;
-import com.solvd.bankingapp.mybatis.CustomerMapper;
-import com.solvd.bankingapp.mybatis.TransactionMapper;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -30,23 +26,5 @@ public class ConnectionFactory {
 
     public static SqlSessionFactory getSqlSessionFactory() {
         return factory;
-    }
-
-    public static AccountMapper getAccountMapper() {
-        try (SqlSession session = factory.openSession(true)) {
-            return session.getMapper(AccountMapper.class);
-        }
-    }
-
-    public static CustomerMapper getCustomerMapper() {
-        try (SqlSession session = factory.openSession(true)) {
-            return session.getMapper(CustomerMapper.class);
-        }
-    }
-
-    public static TransactionMapper getTransactionMapper() {
-        try (SqlSession session = factory.openSession(true)) {
-            return session.getMapper(TransactionMapper.class);
-        }
     }
 }

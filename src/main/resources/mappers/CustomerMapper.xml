@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.solvd.bankingapp.mybatis.CustomerMapper">
+<mapper namespace="com.solvd.bankingapp.dao.interfaces.ICustomerDAO">
 
     <sql id="getCustomer">
         <![CDATA[
@@ -103,7 +103,7 @@
         <result column="CUSTOMER_DATE_OF_BIRTH" property="dateOfBirth"/>
         <collection property="accounts"
                     ofType="com.solvd.bankingapp.models.Account"
-                    resultMap="com.solvd.bankingapp.mybatis.AccountMapper.AccountResultMap"/>
+                    resultMap="com.solvd.bankingapp.dao.interfaces.IAccountDAO.AccountResultMap"/>
     </resultMap>
 
 </mapper>

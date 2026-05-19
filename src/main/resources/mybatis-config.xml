@@ -22,14 +22,5 @@
         <mapper resource="mappers/AccountMapper.xml"/>
         <mapper resource="mappers/CustomerMapper.xml"/>
         <mapper resource="mappers/TransactionMapper.xml"/>
-        <mapper resource="mappers/TransferMapper.xml"/>
-        <mapper resource="mappers/AddressMapper.xml"/>
-        <mapper resource="mappers/CardMapper.xml"/>
-        <mapper resource="mappers/CurrencyMapper.xml"/>
-        <mapper resource="mappers/IdentityDocumentMapper.xml"/>
-        <mapper resource="mappers/LoanMapper.xml"/>
-        <mapper resource="mappers/LoanPaymentMapper.xml"/>
-        <mapper resource="mappers/NotificationMapper.xml"/>
-        <mapper resource="mappers/RewardMapper.xml"/>
     </mappers>
 </configuration>

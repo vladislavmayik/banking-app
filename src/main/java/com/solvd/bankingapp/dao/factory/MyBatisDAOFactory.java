@@ -3,24 +3,25 @@ package com.solvd.bankingapp.dao.factory;
 import com.solvd.bankingapp.dao.interfaces.IAccountDAO;
 import com.solvd.bankingapp.dao.interfaces.ICustomerDAO;
 import com.solvd.bankingapp.dao.interfaces.ITransactionDAO;
-import com.solvd.bankingapp.dao.impl.MyBatisAccountDAO;
-import com.solvd.bankingapp.dao.impl.MyBatisCustomerDAO;
-import com.solvd.bankingapp.dao.impl.MyBatisTransactionDAO;
+import org.apache.ibatis.session.SqlSession;
 
 public class MyBatisDAOFactory extends DAOFactory {
 
     @Override
     public IAccountDAO getAccountDAO() {
-        return new MyBatisAccountDAO();
+        SqlSession session = ConnectionFactory.getSqlSessionFactory().openSession();
+        return session.getMapper(IAccountDAO.class);
     }
 
     @Override
     public ICustomerDAO getCustomerDAO() {
-        return new MyBatisCustomerDAO();
+        SqlSession session = ConnectionFactory.getSqlSessionFactory().openSession();
+        return session.getMapper(ICustomerDAO.class);
     }
 
     @Override
     public ITransactionDAO getTransactionDAO() {
-        return new MyBatisTransactionDAO();
+        SqlSession session = ConnectionFactory.getSqlSessionFactory().openSession();
+        return session.getMapper(ITransactionDAO.class);
     }
 }
